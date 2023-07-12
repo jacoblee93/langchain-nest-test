@@ -1,5 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+const {
+  OpenAI,
+  OpenAIChat
+} = require("langchain/llms/openai");
 
 @Controller()
 export class AppController {
@@ -7,6 +11,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
+    const model = new OpenAI();
     return this.appService.getHello();
   }
 }
