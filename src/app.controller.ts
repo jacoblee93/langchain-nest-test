@@ -2,7 +2,6 @@ import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 const {
   OpenAI,
-  OpenAIChat
 } = require("langchain/llms/openai");
 
 @Controller()
@@ -11,7 +10,10 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    const model = new OpenAI();
-    return this.appService.getHello();
+    const model = new OpenAI({
+      modelName: "gpt-3.5-turbo-instruct",
+    });
+    return model.invoke("How are you?");
+    // return this.appService.getHello();
   }
 }
